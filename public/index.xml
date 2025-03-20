@@ -2,17 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>EK Dev Blog</title>
-    <link>//localhost:1313/</link>
+    <link>http://localhost:1313/blog/</link>
     <description>Recent content on EK Dev Blog</description>
+    <image>
+      <title>EK Dev Blog</title>
+      <url>http://localhost:1313/blog/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>http://localhost:1313/blog/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
     <generator>Hugo -- 0.145.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 20 Mar 2025 15:38:28 +0900</lastBuildDate>
-    <atom:link href="//localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 20 Mar 2025 17:50:36 +0900</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Test2</title>
+      <link>http://localhost:1313/blog/docs/test2/</link>
+      <pubDate>Thu, 20 Mar 2025 17:50:36 +0900</pubDate>
+      <guid>http://localhost:1313/blog/docs/test2/</guid>
+      <description>&lt;h2 id=&#34;test-2-title&#34;&gt;Test 2 Title&lt;/h2&gt;
+&lt;p&gt;test2 title&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Test</title>
-      <link>//localhost:1313/docs/test/</link>
+      <link>http://localhost:1313/blog/docs/test/</link>
       <pubDate>Thu, 20 Mar 2025 15:38:28 +0900</pubDate>
-      <guid>//localhost:1313/docs/test/</guid>
+      <guid>http://localhost:1313/blog/docs/test/</guid>
       <description>&lt;h2 id=&#34;test-title&#34;&gt;Test Title&lt;/h2&gt;
 &lt;p&gt;Test content&lt;/p&gt;</description>
     </item>
