@@ -1,4 +1,4 @@
-baseURL:
+baseURL: "http://loveAlakazam.github.io/blog/"
 languageCode: en-us
 title: EK Dev Blog
 theme: PaperMod
