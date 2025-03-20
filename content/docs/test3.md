@@ -7,3 +7,7 @@ draft: false
 # test 3
 
 테스트3
+
+```js
+console.log("hello world");
+```
