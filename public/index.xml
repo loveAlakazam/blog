@@ -26,8 +26,10 @@
       <link>http://localhost:1313/blog/docs/test/</link>
       <pubDate>Thu, 20 Mar 2025 15:38:28 +0900</pubDate>
       <guid>http://localhost:1313/blog/docs/test/</guid>
-      <description>&lt;h2 id=&#34;test-title&#34;&gt;Test Title&lt;/h2&gt;
-&lt;p&gt;Test content&lt;/p&gt;</description>
+      <description>&lt;h2 id=&#34;test-main-title&#34;&gt;Test Main Title&lt;/h2&gt;
+&lt;p&gt;Test content&lt;/p&gt;
+&lt;h2 id=&#34;h2-sub-title&#34;&gt;h2 sub-title&lt;/h2&gt;
+&lt;p&gt;sub content&lt;/p&gt;</description>
     </item>
     <item>
       <title>Test3</title>
