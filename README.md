@@ -123,6 +123,22 @@ draft: false
 
 <br>
 
+## 다른 컴퓨터에서 현재 래포지토리(blog)를 클론하여 사용할 경우
+
+- 문제사항
+
+  - content/docs 디렉토리 내부 md파일 내용을 수정했고, 웹사이트를 로컬호스트로 테스트했지만 수정된 내용이 반영이 되지 않았습니다.
+  - 블로그 초기 환경 셋팅했던 컴퓨터에서의 디렉토리환경과 다르게(ROOT > {래포지토리}), 래포지토리를 클론한 다른컴퓨터에서의 환경은 {래포지토리명} 디렉토리가 존재하지 않습니다.
+
+- 해결방안: 현재 래포지토리를 다른컴퓨터에서 클론할 경우에는 submodule을 환경에 맞춰야한다.
+
+```shell
+# needed when you reclone your repo (submodules may not get cloned automatically)
+$ git submodule update --init --recursive
+```
+
+<br>
+
 ## PaperMod 테마를 적용한 깃헙블로그 초기환경 셋팅
 
 > [ 🖐️ 주의 ] <br><br>
