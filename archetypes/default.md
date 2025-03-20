@@ -1,5 +1,5 @@
 ---
-date: "{{ .Date | site.time | date: '%Y-%m-%d %H:%M:%S %z' }}"
+date: "{{ .Date }}"
 draft: true
 title: '{{ replace .File.ContentBaseName "-" " " | title }}'
 ---
