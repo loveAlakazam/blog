@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Docs on EK Dev Blog</title>
+    <link>https://loveAlakazam.github.io/blog/docs/</link>
+    <description>Recent content in Docs on EK Dev Blog</description>
+    <image>
+      <title>EK Dev Blog</title>
+      <url>https://loveAlakazam.github.io/blog/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://loveAlakazam.github.io/blog/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- 0.125.7</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 20 Mar 2025 17:50:36 +0900</lastBuildDate>
+    <atom:link href="https://loveAlakazam.github.io/blog/docs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Test2</title>
+      <link>https://loveAlakazam.github.io/blog/docs/test2/</link>
+      <pubDate>Thu, 20 Mar 2025 17:50:36 +0900</pubDate>
+      <guid>https://loveAlakazam.github.io/blog/docs/test2/</guid>
+      <description>Test 2 Title test2 title</description>
+    </item>
+    <item>
+      <title>Test</title>
+      <link>https://loveAlakazam.github.io/blog/docs/test/</link>
+      <pubDate>Thu, 20 Mar 2025 15:38:28 +0900</pubDate>
+      <guid>https://loveAlakazam.github.io/blog/docs/test/</guid>
+      <description>Test Main Title Test content
+h2 sub-title sub content</description>
+    </item>
+    <item>
+      <title>Test3</title>
+      <link>https://loveAlakazam.github.io/blog/docs/test3/</link>
+      <pubDate>Thu, 20 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>https://loveAlakazam.github.io/blog/docs/test3/</guid>
+      <description>test 3 테스트3
+1 console.log(&amp;#34;hello world&amp;#34;); </description>
+    </item>
+  </channel>
+</rss>
