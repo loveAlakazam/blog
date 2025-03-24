@@ -4,11 +4,6 @@
     <title>Categories on EK Dev Blog</title>
     <link>http://localhost:1313/blog/categories/</link>
     <description>Recent content in Categories on EK Dev Blog</description>
-    <image>
-      <title>EK Dev Blog</title>
-      <url>http://localhost:1313/blog/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>http://localhost:1313/blog/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
-    </image>
     <generator>Hugo -- 0.145.0</generator>
     <language>en-us</language>
     <atom:link href="http://localhost:1313/blog/categories/index.xml" rel="self" type="application/rss+xml" />
