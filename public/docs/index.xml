@@ -4,24 +4,73 @@
     <title>Docs on EK Dev Blog</title>
     <link>http://localhost:1313/blog/docs/</link>
     <description>Recent content in Docs on EK Dev Blog</description>
-    <image>
-      <title>EK Dev Blog</title>
-      <url>http://localhost:1313/blog/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>http://localhost:1313/blog/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
-    </image>
     <generator>Hugo -- 0.145.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 20 Mar 2025 15:38:28 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 24 Mar 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/blog/docs/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Test</title>
-      <link>http://localhost:1313/blog/docs/test/</link>
-      <pubDate>Thu, 20 Mar 2025 15:38:28 +0900</pubDate>
-      <guid>http://localhost:1313/blog/docs/test/</guid>
-      <description>&lt;h2 id=&#34;test-main-title&#34;&gt;Test Main Title&lt;/h2&gt;
-&lt;p&gt;Test content&lt;/p&gt;
-&lt;h2 id=&#34;h2-sub-title&#34;&gt;h2 sub-title&lt;/h2&gt;
-&lt;p&gt;sub content&lt;/p&gt;</description>
+      <title>동시성 제어 (Concurrency Methods)</title>
+      <link>http://localhost:1313/blog/docs/concurrency-methods/concurrency-methods/</link>
+      <pubDate>Mon, 24 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/docs/concurrency-methods/concurrency-methods/</guid>
+      <description>&lt;h2 id=&#34;동시성제어concurrency-control&#34;&gt;동시성제어(concurrency control)&lt;/h2&gt;
+&lt;p&gt;다중 사용자 환경을 지원하는 데이터베이스시스템에서 여러 트랜잭션들이 성공적으로 동시에 실행될 수 있도록 지원하는 기술을 의미합니다. 트랜잭션간의 간섭으로 문제가 발생하지 않도록 트랜잭션의 실행순서를 제어하는 기법입니다. 동시성제어는 실생활에 사용되고 있는 소프트웨어 서비스에서도 많이 활용되고 있습니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;금융서비스에서 금액 송금/저금&lt;/li&gt;
+&lt;li&gt;쇼핑몰서비스에서 주문처리/재고감소/결제요청&lt;/li&gt;
+&lt;li&gt;동시 접속자수가 많은 실시간 앱에서 채팅/댓글/좋아요 수 증가&lt;/li&gt;
+&lt;li&gt;포인트나, 캐시백을 적립/사용&lt;/li&gt;
+&lt;li&gt;이벤트 응모와 선착순쿠폰 발급&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;동시성제어를-하지-않으면-어떤-문제가-발생할까&#34;&gt;동시성제어를 하지 않으면 어떤 문제가 발생할까?&lt;/h3&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;문제점&lt;/th&gt;
+          &lt;th&gt;설명&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;갱신내용 손실(lost update)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;트랜잭션들이 동일한 데이터를 동시에 갱신하는 경우에 발생합니다.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;이전 트랜잭션이 데이터를 갱신한 후에 트랜잭션을 종료하기전에 나중 트랜잭션이 갱신값을 덮어쓰는 경우에 발생합니다.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;현황파악 오류(dirty read)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;트랜잭션의 중간 수행결과를 다른 트랜잭션이 참조함으로써 오류가 발생합니다.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;모순성(inconsistency)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;두 트랜잭션이 동시에 실행할 때 데이터베이스가 일관성이 없는 상태로 남는 문제가 발생합니다.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;연쇄복귀 (cascading rollback)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;복수의 트랜잭션이 데이터 공유시 특정 트랜잭션이 처리를 취소할때 다른 트랜잭션이 처리한 부분에 대한 취소가 불가능합니다.&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;동시성제어에는-어떤-제어기법이-있을까&#34;&gt;동시성제어에는 어떤 제어기법이 있을까?&lt;/h3&gt;
+&lt;h4 id=&#34;잠금locking&#34;&gt;잠금(locking)&lt;/h4&gt;
+&lt;p&gt;&lt;img alt=&#34;locking&#34; loading=&#34;lazy&#34; src=&#34;../images/locking.png&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>항해를 시작하는 마음가짐</title>
+      <link>http://localhost:1313/blog/docs/hh-start/</link>
+      <pubDate>Sat, 22 Mar 2025 14:34:00 +0900</pubDate>
+      <guid>http://localhost:1313/blog/docs/hh-start/</guid>
+      <description>&lt;h2 id=&#34;지금까지의-회고&#34;&gt;지금까지의 회고&lt;/h2&gt;
+&lt;p&gt;현재는 스스로 찾아야되고 병행을 해야했지만, 나를 더 디벨롭하고 싶습니다.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;시간관리의 중요성을 느꼈고, 늦게 출발하고 남들보다 뒤처지기도 했습니다. 이제는 더이상 뒤쳐지고 싶지 않습니다.&lt;/p&gt;
+&lt;p&gt;느리다는 이유로 많이 회피해왔던 것도 있고 자신감이 없어지기도 했습니다. 남과 비교하면서 나를 깎아 내렸으니까요. 그치만 계속 비교로 나를 채찍질하기보다는 내가 느린걸 인정하고 나의 페이스대로 묵묵히 꾸준히 문제를 하나씩 해결해나가고 싶습니다.&lt;/p&gt;
+&lt;h2 id=&#34;항해플러스에-참여한-계기&#34;&gt;항해플러스에 참여한 계기&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;단순 CRUD API 설계 및 개발이 아닌 한단계 더 나아가고 싶습니다.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

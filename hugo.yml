@@ -18,7 +18,7 @@ minify:
 params:
   title: EK Dev Blog
   keywords: [Blog, Portfolio, PaperMod]
-  images: ["<link or path of image for opengraph, twitter-cards>"]
+  images: []
   defaultTheme: auto # dark, light
   disableThemeToggle: false
 
