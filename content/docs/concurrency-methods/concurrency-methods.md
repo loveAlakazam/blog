@@ -3,9 +3,9 @@ title: "동시성 제어 (Concurrency Methods)"
 date: "2025-03-24"
 tags: ["Basic", "동시성제어", "Mutex", "Lock", "Semaphore"]
 draft: false
-cover:
-  hiddenInList: true
 ---
+
+![concurrency-db](../images/concurrency-db.png)
 
 ## 동시성제어(concurrency control)
 
@@ -80,7 +80,7 @@ cover:
 
 #### **공유자원(shared resource)**
 
-공유자원은 **여러 프로세스가 공동으로 사용하는 자원**을 의미합니다. 전역변수가 될 수도 있고, 파일이 될 수도, 입출력장치, 보조기억장치가 될수도 있습니다.
+공유자원은 **여러 프로세스가 공동으로 사용하는 자원** 을 의미합니다. 전역변수가 될 수도 있고, 파일이 될 수도, 입출력장치, 보조기억장치가 될수도 있습니다.
 
 #### **임계구역(critical section)**
 
@@ -169,16 +169,231 @@ cover:
 
 ## Java 언어에서의 동시성제어 방식은 어떤게 있을까?
 
-|     |     |
-| --- | --- |
+| 범주                        | 방법                                   | 설명                                                                                                             |
+| --------------------------- | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | --- |
+| JVM 레벨                    | `synchronized`, `ReentrantLock`        | 한 JVM 내에서만 유효한 락이며, 멀티 인스턴스 환경에서는 무의미하다.                                              |     |
+|                             | JVM 내 큐기반 처리 `ConcurrentHashMap` | 동시성 제어를 위한 직렬화 전략으로 여러요청이 한번에 와도 각 요청을 큐에 넣고 하나씩 처리한다.                   |
+| DB 레벨                     | 비관적락(Pessimistic Lock)             | 조회시 락을 걸고 다른 트랜잭션을 차단하여 데이터충돌을 미연에 방지한다. 데드락이 발생하여 성능저하가 올 수 있다. |
+|                             |                                        | `@Lock(LockModeType.PESSIMISTIC_WRITE)`                                                                          |
+|                             | 낙관적락(Optimistic Lock)              | 충돌가능성을 감안하고 수정하며, 충돌이 발생하면 롤백한다                                                         |
+| 분산환경                    | Redisson, Redis Lock, Zookeeper 등     | 분산락 구현 가능. 멀티인스턴스 환경에서 락공유가 가능하다.                                                       |
+| 비동기식 직렬화 큐기반 처리 | Kafka, RabbitMQ 등으로 직렬화 처리     | 비동기식 직렬화 방식                                                                                             |
 
-### 어떻게 서비스에서 동시성제어를 적용해야할까?
+- 직렬화(serialization): 객체의 상태를 바이트스트림으로 변환하여 파일이나 네트워크를 통해 전송할 수 있게하는 과정이며, 분산시스템에서도 객체의 상태를 전송하고 수신자측에서는 이를 다시 객체로 복원하여(역직렬화)하여 사용할 수 있습니다.
+
+---
+
+## 어떻게 서비스에서 동시성제어를 적용해야할까?
+
+> 미션 상황: 동일한 사용자가 동시에 포인트를 충전할 경우 해당요청이 정상적으로 처리되어야합니다.
+
+JVM 내에서 동시성테스트를 하려고한다면, synchornized, ReentrantLock, JVM 내 큐(queue)를 사용하는 방법이 존재합니다. 그러나 동시성제어를 테스트할때 통합테스트에서 실행해야되는건지 아니면 유닛테스트에서 테스트를 해야될지 애매할겁니다.
+
+단위테스트는 가장 작은 테스트인만큼 1개 메서드/함수 단위로 독립적인 기능을 빠르게 검증하기 위한 테스트입니다.
+동시요청이 발생할 때 큐를 이용해서 순서를 제공해주거나 잠금(locking)연산을 수행하여 다른요청이 접근하지 못하도록 막거나, 큐를 이용해서 순서를 보장해줘야하는 역할까지 검증을 해야되기 때문에 단위테스트만으로는 어려울거같습니다.
+
+즉, 동시성은 여러개의 스레드가 동시에 접근하거나 실행될 때 발생하는 문제를 검증해야하므로, 단일 스레드 환경에서 실행되는 단위테스트만으로는 동시적인 상황을 재현하기가 어렵습니다. **따라서 동시성을 테스트하려면 통합테스트로 검증** 해야됩니다.
+
+### synchronized 활용하기
+
+- `synchronized`는 하나의 스레드만 임계영역(critical section)에 접근하도록 보장하는 키워드로, 공유자원에 대한 동시접근을 차단하여 Race Condition을 방지합니다.
+
+> 유저포인트 ID(id) 마다 락을 관리 - ConcurrentHashMap 으로 분리된 락들을 관리
+
+```java
+@Component
+public class UserPointLockManager {
+	// 사용자별 분리된 락을 관리하는 맵
+	// 1. 사용자 ID(id) 마다 하나의 고유한 락(Object)를 저장하는 맵
+	// 2. synchronized에 넘길 락을 하나만 쓰면 전역락(exclusive lock)이 되므로 사용자별로 분리된 락객체를 관리
+	private final ConcurrentHashMap<Long, Object> locks = new ConcurrentHashMap<>();
+
+	// getLock: 사용자 ID(id)에 해당하는 락(lock)을 획득.
+	public Object getLock(Long id) {
+		// locks.computeIfAbsent(id, key -> new Object());
+		// 1. 사용자 ID(id)에 해당하는 락객체가 이미 있으면 그 객체를 반환하고, 없다면 새로운 락을 넣는다.
+		// 2. 사용자 ID(id)별 하나의 고유한 락을 필요할 때만 만들고 중복으로 만들지않도록 보장한다.
+		return locks.computeIfAbsent(id, key -> new Object());
+	}
+}
+```
+
+> 충전 서비스 내부로직에 synchronized 블록을 추가하여 임계구역 블록 지정하기
+
+```java
+@RequiredArgsConstructor
+public class PointServiceImpl implements PointService {
+
+	private final UserPointRepository userPointRepository;
+	private final PointHistoryRepository pointHistoryRepository;
+	private final UserPointLockManager userPointLockManager;
+	private static final Logger log = LoggerFactory.getLogger(PointServiceImpl.class);
+
+  ...
+
+@Override
+	public ChargeResponse charge(ChargeRequest request) {
+		long id = request.id();
+		long amount = request.amount();
+
+		// synchronized 예약어를 붙인 블록은 임계영역으로 : 유저포인트 ID(id)의 lock을 사용하여 다른요청의 접근을 제한한다.
+		synchronized (userPointLockManager.getLock(id)){
+			// 로그기록
+			log.info("::: 🔒 Lock acquired for userId: {}, thread: {}", id, Thread.currentThread().getName());
+
+			UserPoint userPoint = this.userPointRepository.findById(id);
+			long myPoint = userPoint.point();
+
+			// 포인트내역에 '충전' 기록
+			this.pointHistoryRepository.insert(id, amount, TransactionType.CHARGE);
+
+			// 포인트 충전
+			UserPoint result = this.userPointRepository.save(id, myPoint + amount);
+			return ChargeResponse.from(result);
+		}
+	}
+}
+```
+
+### ReentrantLock 활용하기
+
+`ReentrantLock`은 동일한 쓰레드가 여러번 락을 획득할 수 있는 재진입이 가능한 락으로 `synchronized` 보다 더 정밀한 락제어와 락 확인 상태, 타임아웃, 인터럽트 처리등이 가능한 클래스입니다. 또한 `ReentrantLock`은 실시간 제어, deadlock 회피, 락 상태 진단 등 고급제어가 필요할 때 적합합니다.
+
+> 유저포인트 ID(id) 마다 락을 관리 - ConcurrentHashMap 으로 분리된 락들을 관리
+
+```java
+@Component
+public class UserPointLockManager {
+	private final ConcurrentHashMap<Long, ReentrantLock> locks = new ConcurrentHashMap<>();
+
+	public ReentrantLock getLock(long id) {
+		return locks.computeIfAbsent(id, key -> new ReentrantLock());
+	}
+}
+```
+
+> 충전 서비스 내부로직에 try블록을 임계구역 블록 지정하고
+> 임계구역 입구에는 `lock.lock()`은 잠금상태인지(이미 요청작업을 수행하고있는 중인지) 아닌지를 확인하고, 잠겨있다면 끝날때까지 기다려야한다. 반대로 열려있는 상태라면 임계영역에 진입하여 잠근다.
+> 작업결과에 상관없이 요청작업 수행이 완료되면 `lock.unlock()`으로 잠금을 해제한다
+
+```java
+@Service
+@RequiredArgsConstructor
+public class PointServiceImpl implements PointService {
+
+	private final UserPointRepository userPointRepository;
+	private final PointHistoryRepository pointHistoryRepository;
+	private static final Logger log = LoggerFactory.getLogger(PointServiceImpl.class);
+	private final UserPointLockManager userPointLockManager;
+
+	@Override
+	public ChargeResponse charge(ChargeRequest request) {
+		long id = request.id();
+		long amount = request.amount();
+
+		ReentrantLock lock = userPointLockManager.getLock(id);
+		lock.lock(); // 락 획득하여 다른요청이 들어오지 못하도록 임계구역을 잠금
+		try{
+			// try 블록안은 임계구역 이므로, 하나의 요청이 작업을 수행
+			log.info("::: 🔒 Lock acquired for userId: {}, thread: {}", id, Thread.currentThread().getName());
+			UserPoint userPoint = this.userPointRepository.findById(id);
+			long myPoint = userPoint.point();
+
+			this.pointHistoryRepository.insert(id, amount, TransactionType.CHARGE); // 포인트내역에 '충전' 기록
+			UserPoint result = this.userPointRepository.save(id, myPoint + amount); // 포인트 충전
+			return ChargeResponse.from(result);
+		} finally {
+			lock.unlock(); // 락을 반환하여 임계구역을 잠금해제
+		}
+	}
+}
+```
+
+### (공통) 동시성 테스트 코드
+
+```java
+@SpringBootTest
+@AutoConfigureMockMvc
+@TestInstance(TestInstance.Lifecycle.PER_CLASS) // 인스턴스를 공유
+public class ChargeConcurrencyTest {
+ @Autowired
+ private MockMvc mockMvc;
+
+ @Autowired
+ private PointService pointService;
+
+ @Autowired
+ private UserPointRepository userPointRepository;
+
+ @Autowired
+ private PointHistoryRepository pointHistoryRepository;
+
+ @Autowired
+ private ObjectMapper objectMapper;
+
+ @Autowired
+ private UserPointLockManager userPointLockManager;
+
+
+ @BeforeEach
+ void setUp() {
+  // UserPoint 의 초기 포인트값을 0 으로한다.
+  userPointRepository.save(1L, 0L);
+ }
+
+@Test
+ void 동시에_100번_충전요청을_요청했을때_정상적으로_합산에_성공해야한다() throws Exception {
+  // given
+  long id = 1L;
+  int threadCount = 100;
+  long chargeAmount = 1000L;
+
+  ExecutorService executor = Executors.newFixedThreadPool(10); // 스레드풀 10개
+  CountDownLatch latch = new CountDownLatch(threadCount); // 요청가능한 스레드개수
+  ChargeRequestBody requestBody = new ChargeRequestBody(chargeAmount);
+  String json = objectMapper.writeValueAsString(requestBody);
+
+  // when
+  for(int i = 0 ; i < threadCount ; i++) {
+   executor.submit(()-> {
+    try {
+      // 충전 API 호출
+     mockMvc.perform(patch("/point/"+id+"/charge")
+      .contentType(MediaType.APPLICATION_JSON)
+      .content(json));
+    } catch (Exception e) {
+     e.printStackTrace();
+     throw new RuntimeException(e);
+    } finally {
+     latch.countDown(); // 요청가능 스레드 개수 감소
+    }
+   });
+  }
+
+  latch.await(); // 다 끝날 때까지 대기
+  Thread.sleep(1000); // 1초 정도 대기후 최종 포인트 확인
+
+  // then
+  long expectedPoint = chargeAmount * threadCount;
+  long finalPoint = userPointRepository.findById(id).point();
+  assertEquals(expectedPoint, finalPoint);
+ }
+}
+```
 
 ---
 
 ## 결론
 
-동시성 제어와 그와 관련된 운영체제 개념들을 정리를 해보니 동시성제어를 이해하는데 걸리는 시간이 줄어들었습니다.
+- 현재 synchronized, ReentrantLock 등 JVM내에서만 활용되는 락이며 하나의 서버에서는 가능합니다.
+- synchronized 은 임계구역을 블록으로 지정하여 나타내지만 단순하게 동시성제어를 처리하는데 좋습니다.
+- ReentrantLock 은 임계구역을 진입하기전에는 lock를 임계구역을 빠져나오면 unlock 으로 명시하여 synchronized 보다는 정교하게 나타냅니다.
+- 동시성제어와 관련된 테스팅은 작성할 때는 단위테스트보다 통합테스트가 적합합니다.
+- 선입선출 자료구조인 큐(queue)를 이용해서 동시성제어 를 해결할 수 있습니다. 하지만 Lock다르게 여러 요청이 한번에 들어와도 각 요청을 큐에넣고 순차적으로 처리하는방식입니다. 오히려 동시성이슈를 제거시켜서 해결하는 방법도 있습니다.
+
+### 보고서를 작성해보면서 느낀점
+
+동시성 제어와 그와 관련된 운영체제 개념들을 정리를 이해하고나서 동시성제어에 대한 자료조사 아티클들을 읽어보니 조금씩 정리가 되는거 같았습니다. 왜 더 기본기를 중요하다고 하는게 몸으로 깨달았습니다. 앞으로도 이 Lock을 이용한 동시성제어를 깊게 다룰텐데, 여기서 더 확장된 데이터베이스에서의 락, Redis의 분산락, Kafka와 RabbitMQ와 같은 비동기식 큐를 이용한 직렬화에 대한 아티클들을 읽어보고싶습니다.
 
 ## 참고자료
 
