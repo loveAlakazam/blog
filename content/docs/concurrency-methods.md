@@ -5,7 +5,7 @@ tags: ["Basic", "동시성제어", "Mutex", "Lock", "Semaphore"]
 draft: false
 ---
 
-![concurrency-db](./images/concurrency-db.png)
+![concurrency-db](../images/concurrency-db.png)
 
 ## 동시성제어(concurrency control)
 
@@ -31,7 +31,7 @@ draft: false
 
 #### 잠금(locking)
 
-![locking](./images/locking.png)
+![locking](../images/locking.png)
 
 잠금(locking)은 하나의 트랜잭션이 실행하는 동안 특정 데이터 항목에 대해서 다른 트랜잭션이 동시에 접근하지 못하도록한 상호배제(mutual exclusive) 입니다. 하나의 트랜잭션이 데이터 항목에 대해서 잠금(lock)을 설정하면 잠금을 설정한 트랜잭션이 잠금해제(unlock)할 때까지 데이터를 독점적으로 사용할 수 있습니다.
 
@@ -47,7 +47,7 @@ draft: false
 
 - 잠금의 단위
 
-![locking_unit](./images/locking-unit.png)
+![locking_unit](../images/locking-unit.png)
 
 잠금의 단위는 **잠금의 대상이 되는 데이터 객체의 크기** 를 의미합니다.
 작게는 레코드의 필드값, 하나의 레코드, 물리적 입출력 단위가 되는 디스크블록이 될 수 있으며, 크게는 테이블이나 데이터베이스까지 하나의 잠금의 단위가 될 수 있습니다.
@@ -103,7 +103,7 @@ draft: false
 
 임계구역을 잠금으로써 프로세스간 상호배제를 이루는 동기화 도구 입니다.
 
-![mutex](./images/mutex_lock_example.png)
+![mutex](../images/mutex_lock_example.png)
 
 > 일상생활에서 탈의실/화장실이 대표적인 예입니다.
 > 앞에 줄이 없고 비어있다면 사용자는 빈 장소에 들어가서 탈의실/화장실 을 이용할 수 있습니다.
@@ -121,7 +121,7 @@ draft: false
 
 ### 세마포어 (semaphore)
 
-![semaphore](./images/semaphore_example.png)
+![semaphore](../images/semaphore_example.png)
 
 세마포어는 공유자원이 여러개 있는 임계 구역 문제도 해결할 수 있는 동기화 도구 입니다.
 
