@@ -7,8 +7,7 @@
 ...</p></div><footer class=entry-footer><span title='2025-03-26 00:00:00 +0000 UTC'>March 26, 2025</span></footer><a class=entry-link aria-label="post link to 객체의 책임(도메인 주도)" href=http://localhost:1313/blog/docs/object-responsibility/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>동시성 제어 (Concurrency Methods)</h2></header><div class=entry-content><p>동시성제어(concurrency control) 정의 멀티스레드 관점에서의 동시성 제어 여러스레드가 동시에 공유자원인 프로세스의 데이터, 파일, 힙, 코드 를 접근하는 것을 제어하는 것을 의미합니다.
 멀티스레드 환경의 스레드는 메인메모리 로부터 값을 복사하여 CPU 캐시에 저장하여 작업을 합니다.
 CPU가 2개 이상이라면 멀티스레드 환경에서 각 스레드는 서로다른 CPU에서 동작하고 있으며 이는 각 스레드가 같은 변수에 대해 읽기/쓰기 동작을 수행할 시 각 CPU 캐시에 저장된 값이 다르기 때문에 변수값 불일치 문제가 발생합니다.
-스레드(thread) 와 멀티스레드(multi-threads)
-스레드(thread)는 프로세스를 구성하는 실행의 흐름 단위 입니다.
+이러한 불일치 문제를 해결하기 위한 방법인 동기화 기법이 필요합니다
 ...</p></div><footer class=entry-footer><span title='2025-03-24 00:00:00 +0000 UTC'>March 24, 2025</span></footer><a class=entry-link aria-label="post link to 동시성 제어 (Concurrency Methods)" href=http://localhost:1313/blog/docs/concurrency-methods/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>프로세스 동기화</h2></header><div class=entry-content><p>프로세스 동기화 동시성제어에는 운영체제 프로세스의 상호배제 동기화 개념들과 많이 연결되어 있습니다. 그래서 관련용어에 대해 전공서적을 읽어보고 정리해봤습니다.
 동기화(synchronization) 프로세스들 사이의 수행시기를 맞추는 것 을 의미하며, 프로세스 동기화 라고도 정의합니다. 프로세스들 사이의 수행시기를 맞춘다 함은 특정 자원에 접근할때 하나의 프로세스만 접근하거나 프로세스를 올바른 순서대로 실행하는 것을 두가지를 일컫습니다.
 실행순서제어 를 위한 동기화: 동시에 실행되는 프로세스를 올바른 순서대로 실행하는 것을 의미합니다.

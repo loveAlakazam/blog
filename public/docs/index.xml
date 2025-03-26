@@ -176,11 +176,7 @@
 &lt;p&gt;여러스레드가 동시에 공유자원인 프로세스의 데이터, 파일, 힙, 코드 를 접근하는 것을 제어하는 것을 의미합니다.&lt;/p&gt;
 &lt;p&gt;멀티스레드 환경의 스레드는 메인메모리 로부터 값을 복사하여 CPU 캐시에 저장하여 작업을 합니다.&lt;/p&gt;
 &lt;p&gt;CPU가 2개 이상이라면 멀티스레드 환경에서 각 스레드는 서로다른 CPU에서 동작하고 있으며 이는 각 스레드가 같은 변수에 대해 읽기/쓰기 동작을 수행할 시 각 CPU 캐시에 저장된 값이 다르기 때문에 변수값 불일치 문제가 발생합니다.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;스레드(thread) 와 멀티스레드(multi-threads)&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;multi-threads&#34; loading=&#34;lazy&#34; src=&#34;../images/multi-threads.png&#34;&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;스레드(thread)는 &lt;strong&gt;프로세스를 구성하는 실행의 흐름 단위&lt;/strong&gt; 입니다.&lt;/p&gt;</description>
+&lt;p&gt;이러한 불일치 문제를 해결하기 위한 방법인 동기화 기법이 필요합니다&lt;/p&gt;</description>
     </item>
     <item>
       <title>프로세스 동기화</title>
