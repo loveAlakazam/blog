@@ -13,8 +13,20 @@
       <link>https://loveAlakazam.github.io/blog/docs/concurrency-methods/</link>
       <pubDate>Mon, 24 Mar 2025 00:00:00 +0000</pubDate>
       <guid>https://loveAlakazam.github.io/blog/docs/concurrency-methods/</guid>
-      <description>동시성제어(concurrency control) 다중 사용자 환경을 지원하는 데이터베이스시스템에서 여러 트랜잭션들이 성공적으로 동시에 실행될 수 있도록 지원하는 기술을 의미합니다. 트랜잭션간의 간섭으로 문제가 발생하지 않도록 트랜잭션의 실행순서를 제어하는 기법입니다. 동시성제어는 실생활에 사용되고 있는 소프트웨어 서비스에서도 많이 활용되고 있습니다.
-금융서비스에서 금액 송금/저금 쇼핑몰서비스에서 주문처리/재고감소/결제요청 동시 접속자수가 많은 실시간 앱에서 채팅/댓글/좋아요 수 증가 포인트나, 캐시백을 적립/사용 이벤트 응모와 선착순쿠폰 발급 동시성제어를 하지 않으면 어떤 문제가 발생할까? 문제점 설명 갱신내용 손실(lost update) 트랜잭션들이 동일한 데이터를 동시에 갱신하는 경우에 발생합니다.</description>
+      <description>동시성제어(concurrency control) 정의 멀티스레드 관점에서의 동시성 제어 여러스레드가 동시에 공유자원인 프로세스의 데이터, 파일, 힙, 코드 를 접근하는 것을 제어하는 것을 의미합니다.
+멀티스레드 환경의 스레드는 메인메모리 로부터 값을 복사하여 CPU 캐시에 저장하여 작업을 합니다.
+CPU가 2개 이상이라면 멀티스레드 환경에서 각 스레드는 서로다른 CPU에서 동작하고 있으며 이는 각 스레드가 같은 변수에 대해 읽기/쓰기 동작을 수행할 시 각 CPU 캐시에 저장된 값이 다르기 때문에 변수값 불일치 문제가 발생합니다.
+이러한 불일치 문제를 해결하기 위한 방법인 동기화 기법이 필요합니다</description>
+    </item>
+    <item>
+      <title>프로세스 동기화</title>
+      <link>https://loveAlakazam.github.io/blog/docs/concurrency-theory/</link>
+      <pubDate>Sun, 23 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>https://loveAlakazam.github.io/blog/docs/concurrency-theory/</guid>
+      <description>프로세스 동기화 동시성제어에는 운영체제 프로세스의 상호배제 동기화 개념들과 많이 연결되어 있습니다. 그래서 관련용어에 대해 전공서적을 읽어보고 정리해봤습니다.
+동기화(synchronization) 프로세스들 사이의 수행시기를 맞추는 것 을 의미하며, 프로세스 동기화 라고도 정의합니다. 프로세스들 사이의 수행시기를 맞춘다 함은 특정 자원에 접근할때 하나의 프로세스만 접근하거나 프로세스를 올바른 순서대로 실행하는 것을 두가지를 일컫습니다.
+실행순서제어 를 위한 동기화: 동시에 실행되는 프로세스를 올바른 순서대로 실행하는 것을 의미합니다.
+상호배제 를 위한 동기화: 상호배제는 공유가 불가능한 자원, 동시에 접근이 안되는 자원을 동시에 접근하지 못하게 하는 것을 의미합니다.</description>
     </item>
   </channel>
 </rss>

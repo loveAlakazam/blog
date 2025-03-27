@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>항해99 플러스백엔드 8기 on EK Dev Blog</title>
+    <link>https://loveAlakazam.github.io/blog/tags/%ED%95%AD%ED%95%B499-%ED%94%8C%EB%9F%AC%EC%8A%A4%EB%B0%B1%EC%97%94%EB%93%9C-8%EA%B8%B0/</link>
+    <description>Recent content in 항해99 플러스백엔드 8기 on EK Dev Blog</description>
+    <generator>Hugo -- 0.125.7</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 22 Mar 2025 14:34:00 +0900</lastBuildDate>
+    <atom:link href="https://loveAlakazam.github.io/blog/tags/%ED%95%AD%ED%95%B499-%ED%94%8C%EB%9F%AC%EC%8A%A4%EB%B0%B1%EC%97%94%EB%93%9C-8%EA%B8%B0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>항해를 시작하는 마음가짐</title>
+      <link>https://loveAlakazam.github.io/blog/docs/hh-start/</link>
+      <pubDate>Sat, 22 Mar 2025 14:34:00 +0900</pubDate>
+      <guid>https://loveAlakazam.github.io/blog/docs/hh-start/</guid>
+      <description>지금까지의 회고 현재는 스스로 찾아야되고 병행을 해야했지만, 나를 더 디벨롭하고 싶습니다.
+시간관리의 중요성을 느꼈고, 늦게 출발하고 남들보다 뒤처지기도 했습니다. 이제는 더이상 뒤쳐지고 싶지 않습니다.
+느리다는 이유로 많이 회피해왔던 것도 있고 자신감이 없어지기도 했습니다. 남과 비교하면서 나를 깎아 내렸으니까요. 그치만 계속 비교로 나를 채찍질하기보다는 내가 느린걸 인정하고 나의 페이스대로 묵묵히 꾸준히 문제를 하나씩 해결해나가고 싶습니다.
+항해플러스에 참여한 계기 단순 CRUD API 설계 및 개발이 아닌 한단계 더 나아가고 싶습니다.
+실무진과 선배개발자들은 어떤 코드/설계/철학을 원하는지 궁금합니다.</description>
+    </item>
+  </channel>
+</rss>
