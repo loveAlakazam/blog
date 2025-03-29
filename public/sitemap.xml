@@ -8,14 +8,23 @@
     <loc>http://localhost:1313/blog/</loc>
     <lastmod>2025-03-29T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/blog/tags/</loc>
+    <lastmod>2025-03-29T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/tags/%ED%95%AD%ED%95%B499/</loc>
+    <lastmod>2025-03-29T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/docs/hh-08-week01-remind/</loc>
+    <lastmod>2025-03-29T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/tags/%ED%95%AD%ED%95%B499-%ED%94%8C%EB%9F%AC%EC%8A%A4%EB%B0%B1%EC%97%94%EB%93%9C-8%EA%B8%B0/</loc>
+    <lastmod>2025-03-29T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/blog/docs/multi-thread-locks/</loc>
     <lastmod>2025-03-26T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/blog/docs/object-responsibility/</loc>
     <lastmod>2025-03-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/blog/tags/</loc>
-    <lastmod>2025-03-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/blog/docs/concurrency-methods/</loc>
     <lastmod>2025-03-24T00:00:00+00:00</lastmod>
@@ -37,9 +46,6 @@
   </url><url>
     <loc>http://localhost:1313/blog/docs/concurrency-theory/</loc>
     <lastmod>2025-03-23T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/blog/tags/%ED%95%AD%ED%95%B499-%ED%94%8C%EB%9F%AC%EC%8A%A4%EB%B0%B1%EC%97%94%EB%93%9C-8%EA%B8%B0/</loc>
-    <lastmod>2025-03-22T14:34:00+09:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/blog/docs/hh-start/</loc>
     <lastmod>2025-03-22T14:34:00+09:00</lastmod>

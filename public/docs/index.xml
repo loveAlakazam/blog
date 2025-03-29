@@ -6,8 +6,47 @@
     <description>Recent content in Docs on EK Dev Blog</description>
     <generator>Hugo -- 0.145.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 26 Mar 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 29 Mar 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/blog/docs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>항해99 1주차 회고 (WIL)</title>
+      <link>http://localhost:1313/blog/docs/hh-08-week01-remind/</link>
+      <pubDate>Sat, 29 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/docs/hh-08-week01-remind/</guid>
+      <description>&lt;h2 id=&#34;멘토링하면서-깨달은-점&#34;&gt;멘토링하면서 깨달은 점&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;통합테스트/유닛테스트 의 범위는 정해져있지 않다.&lt;/li&gt;
+&lt;li&gt;통합테스트에 대한 최소 기준은 내가 호출할 친구가 통합테스트로 검증되어있는지 확인을 합니다.
+&lt;ul&gt;
+&lt;li&gt;단위함수가 아닌 2개이상의 함수나 외부의존성이 있는지&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;e2e 관점으로도 통합테스트를 할 수 있다.
+&lt;ul&gt;
+&lt;li&gt;비개발자 를 대상으로 내부동작보다는 호출했을때 실질적은 결과를 보여주는 테스트도 괜찮은 편.&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;가까운 대상을 테스트하는게 좋다&lt;/li&gt;
+&lt;li&gt;DTO입장에서는 서비스 메서드함수 한개가 통합테스트가 될 수도 있다.&lt;/li&gt;
+&lt;li&gt;단위테스트는 테스트 대상외의것들을 (서비스의 의존성을 비롯한 테스트 대상에는 해당되지않지만 서비스에 연결되어있는 대상들을) Mocking 을 해야한다.&lt;/li&gt;
+&lt;li&gt;객체에게 책임을 부여하면 불필요한 코드를 제외할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;문제---이번주차를-지나며-겪었던-문제가-무엇이었나요&#34;&gt;문제 - 이번주차를 지나며 겪었던 문제가 무엇이었나요?&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;빠르게 2일내로 풀어봤지만 멘토링을 받은 이후에 제 코드를 개선이 필요하다는 걸 깨달았습니다.&lt;/li&gt;
+&lt;li&gt;코드개선하면서 깃브랜치를 reset, force push 해야되는 번거로움이 있었습니다 ㅎㅎ;&lt;/li&gt;
+&lt;li&gt;특히 객체에게 책임을 부여하는 부분과 그에대한 테스트코드 수정에서 시간이 많이 소요됐습니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;시도---문제를-해결하기-위해-어떤-시도를-하셨나요&#34;&gt;시도 - 문제를 해결하기 위해 어떤 시도를 하셨나요?&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;각 테스트를 수행후에 데이터를 삭제하게 됐는데요. Reflection 을 이용한 삭제는 안정성과 유지보수측면에서 좋지 않다는 생각이 들었습니다. 심지어 코드도 길구요.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;해결---문제를-어떻게-해결하셨나요&#34;&gt;해결 - 문제를 어떻게 해결하셨나요?&lt;/h2&gt;
+&lt;p&gt;제가 퍼스트 펭귄이되어, 먼저 팀원들에게 코드리뷰를 부탁했습니다.
+코드리뷰 이후에는 팀원들로부터 개인별적으로 의견을 주셨습니다.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>synchronized 와 ReentrantLock 은 어떤 차이점이 있을까?</title>
       <link>http://localhost:1313/blog/docs/multi-thread-locks/</link>
