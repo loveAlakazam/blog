@@ -6,8 +6,15 @@
     <description>Recent content in Docs on EK Dev Blog</description>
     <generator>Hugo -- 0.125.7</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 26 Mar 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 29 Mar 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://loveAlakazam.github.io/blog/docs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>항해99 1주차 회고 (WIL)</title>
+      <link>https://loveAlakazam.github.io/blog/docs/hh-08-week01-remind/</link>
+      <pubDate>Sat, 29 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>https://loveAlakazam.github.io/blog/docs/hh-08-week01-remind/</guid>
+      <description>멘토링하면서 깨달은 점 통합테스트/유닛테스트 의 범위는 정해져있지 않다. 통합테스트에 대한 최소 기준은 내가 호출할 친구가 통합테스트로 검증되어있는지 확인을 합니다. 단위함수가 아닌 2개이상의 함수나 외부의존성이 있는지 e2e 관점으로도 통합테스트를 할 수 있다. 비개발자 를 대상으로 내부동작보다는 호출했을때 실질적은 결과를 보여주는 테스트도 괜찮은 편. 가까운 대상을 테스트하는게 좋다 DTO입장에서는 서비스 메서드함수 한개가 통합테스트가 될 수도 있다. 단위테스트는 테스트 대상외의것들을 (서비스의 의존성을 비롯한 테스트 대상에는 해당되지않지만 서비스에 연결되어있는 대상들을) Mocking 을 해야한다. 객체에게 책임을 부여하면 불필요한 코드를 제외할 수 있다.</description>
+    </item>
     <item>
       <title>synchronized 와 ReentrantLock 은 어떤 차이점이 있을까?</title>
       <link>https://loveAlakazam.github.io/blog/docs/multi-thread-locks/</link>
