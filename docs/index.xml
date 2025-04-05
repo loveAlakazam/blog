@@ -6,8 +6,20 @@
     <description>Recent content in Docs on EK Dev Blog</description>
     <generator>Hugo -- 0.125.7</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 29 Mar 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 05 Apr 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://loveAlakazam.github.io/blog/docs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>항해99 2주차 회고 (WIL)</title>
+      <link>https://loveAlakazam.github.io/blog/docs/hh-08-week02-remind/</link>
+      <pubDate>Sat, 05 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://loveAlakazam.github.io/blog/docs/hh-08-week02-remind/</guid>
+      <description>멘토링하면서 깨달은 점 객체에게 책임을 부여시켜서 분리를 한다면 TDD 도 가능합니다.
+우리는 그동안 코딩을하면서 API를 설계하고 개발했다. 코딩으로 설계를 할 수 있다 하지만 견고하거나 명확하지 않을 수 있습니다.
+명확한 설계가 뒷받침된다면 코딩은 단순히 명확한 설계를 구체화하는 수단이 될 수 있습니다.
+과제 발제시간에 발제 코치인 허재님이 말씀하신 부분이 기억이 남습니다.
+설계가 명확하면, &amp;ldquo;코드를 치는 행위&amp;rdquo; 는 목표를 달성하는 &amp;ldquo;수단&amp;rdquo; 이 된다.
+설계가 명확하지 않으면, &amp;ldquo;코드를 치는 행위&amp;rdquo; 는 불필요한 &amp;ldquo;노동&amp;rdquo; 이 된다.</description>
+    </item>
     <item>
       <title>항해99 1주차 회고 (WIL)</title>
       <link>https://loveAlakazam.github.io/blog/docs/hh-08-week01-remind/</link>
