@@ -9,6 +9,16 @@
     <lastBuildDate>Sat, 05 Apr 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://loveAlakazam.github.io/blog/docs/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>아키텍쳐 고민하기</title>
+      <link>https://loveAlakazam.github.io/blog/docs/upgrade-architect/</link>
+      <pubDate>Sat, 05 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://loveAlakazam.github.io/blog/docs/upgrade-architect/</guid>
+      <description>ERD 개선하기 보완피드백1: 유저와 토큰 테이블 분리하기
+보완피드백2: 테이블의 역할을 고민해서 만들기
+payments 라는 엔티티에 금액정보가 없어서 책임을 다하지 못할 수 있음. 2차 설계안 고민포인트 대기열토큰의 대기순서를 나타내려면, 토큰테이블에 대기순서를 기재하는게 좋을까요? 아니면 대기열큐를 하나의 테이블로 나타내어 대기순서를 기재하는게 좋을까요? 멀티스레드의 동시성을 고려하게될텐데 여기서는 대기열이 동시성을 담당하는거 같습니다. 계속 대기열도 테이블로 나타내려고하는데 아직도 혼란이 남은거같아 질문을 드립니다.
+설계를 하면서 깨달은 설계에 대한 나의 철학 Seat 테이블에 왜 price 컬럼이 있나요? 콘서트나 뮤지컬 연극의 경우에는 좌석에 따라 가격이 다르기 때문입니다.</description>
+    </item>
+    <item>
       <title>항해99 2주차 회고 (WIL)</title>
       <link>https://loveAlakazam.github.io/blog/docs/hh-08-week02-remind/</link>
       <pubDate>Sat, 05 Apr 2025 00:00:00 +0000</pubDate>
