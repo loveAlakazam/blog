@@ -66,55 +66,7 @@ draft: false
 >
 > 보완피드백 2: 좌석예약 요청 API에서 예약서비스에 콘서트 좌석의 상태 확인을 요청하는데 예약서비스에서 해당 구현이 가능한지 다시 생각해보기.
 
-여기서는 좌석예약 요청 API 에서만 공개하고 나머지는 [2차 시퀀스 다이어그램 위키문서](https://github.com/loveAlakazam/hh-08-concert/wiki/03_%EC%8B%9C%ED%80%80%EC%8A%A4%EB%8B%A4%EC%9D%B4%EC%96%B4%EA%B7%B8%EB%9E%A8_2nd)에 기재했습니다.
-
-### 좌석예약 요청 API 개선
-
-```mermaid
-sequenceDiagram
-    title 좌석 예약 요청 API
-    autonumber
-
-    actor client as 사용자
-    participant tokenValidator as 토큰 인터셉터
-    participant controller as 에약 컨트롤러
-    participant service as 예약 서비스
-    participant concertRepository as 콘서트 좌석 래포지토리
-    participant repository as 예약 래포지토리
-
-
-
-    %% 토큰 유효성 검증
-    Note over client, tokenValidator: 토큰검증은 토큰 인터셉터에서 처리
-    client->>+controller: 좌석 예약 요청 <br> [POST] /reservations
-
-    %% 좌석 예약
-    controller->>+service: 좌석 예약 요청
-    service->>+concertRepository: 예약좌석 상태 정보 조회 요청
-    concertRepository->>concertRepository: 예약가능한 좌석 스케줄러 처리
-    concertRepository->>service: 예약 좌석의 상태 정보 응답 데이터 반환
-
-    alt 해당 좌석의 상태가 "예약 가능" 인 경우
-        service->>concertRepository: 좌석 상태를 "예약 불가능" 으로 변경 요청
-        concertRepository->>-service: 좌석 상태 변경
-
-        service->>+repository: 예약 정보 조회 요청
-        repository->>service: 예약 정보 응답 (신규 좌석 예약은 예약정보 없음)
-        opt 신규 좌석 예약일 경우
-	        service->>repository: 예약 정보 생성 요청
-	        repository->>service: 예약 정보 반환
-        end
-        service->>repository: 예약 상태를 결제 대기중(PENDING_PAYMENT) 으로 변경 요청
-        repository->>-service: 예약 상태 변경
-
-        service->>controller: 사용자에게 5분 내에 결제해야 확정된 자리 입니다 메시지 전달
-        controller->>client: 해당 좌석 예약 성공 <br> 201 Created
-
-    else 해당 좌석의 상태가 "예약 불가능" 인 경우
-        service->>-controller: 이미 예약된 좌석이므로 좌석 예약 불가 예외 발생
-        controller->>-client: 예약 실패 예외 메시지 응답 <br> 409 Conflict
-    end
-```
+Hugo 블로그의 코드포맷팅에서 Mermaid.js를 지원하지 않기때문에 자세한 시퀀스다이어그램은 내용은 [2차 시퀀스 다이어그램 위키문서](https://github.com/loveAlakazam/hh-08-concert/wiki/03_%EC%8B%9C%ED%80%80%EC%8A%A4%EB%8B%A4%EC%9D%B4%EC%96%B4%EA%B7%B8%EB%9E%A8_2nd)에 기재했습니다.
 
 ---
 
