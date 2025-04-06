@@ -66,7 +66,7 @@ draft: false
 >
 > 보완피드백 2: 좌석예약 요청 API에서 예약서비스에 콘서트 좌석의 상태 확인을 요청하는데 예약서비스에서 해당 구현이 가능한지 다시 생각해보기.
 
-Hugo 블로그의 코드포맷팅에서 Mermaid.js를 지원하지 않기때문에 자세한 시퀀스다이어그램은 내용은 [2차 시퀀스 다이어그램 위키문서](https://github.com/loveAlakazam/hh-08-concert/wiki/03_%EC%8B%9C%ED%80%80%EC%8A%A4%EB%8B%A4%EC%9D%B4%EC%96%B4%EA%B7%B8%EB%9E%A8_2nd)에 기재했습니다.
+Hugo 블로그의 코드포맷팅에서 Mermaid.js를 지원하지 않기때문에 자세한 시퀀스다이어그램은 [2차 시퀀스 다이어그램 위키문서](https://github.com/loveAlakazam/hh-08-concert/wiki/03_%EC%8B%9C%ED%80%80%EC%8A%A4%EB%8B%A4%EC%9D%B4%EC%96%B4%EA%B7%B8%EB%9E%A8_2nd)에 기재했습니다.
 
 ---
 
