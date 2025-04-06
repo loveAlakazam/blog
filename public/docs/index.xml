@@ -63,7 +63,15 @@
       <link>http://localhost:1313/blog/docs/dto-record/</link>
       <pubDate>Fri, 04 Apr 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/blog/docs/dto-record/</guid>
-      <description>&lt;h2 id=&#34;dto-레코드란&#34;&gt;Dto 레코드란?&lt;/h2&gt;</description>
+      <description>&lt;h2 id=&#34;dto-레코드란&#34;&gt;Dto 레코드란?&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;참고자료
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://yozm.wishket.com/magazine/detail/2814/&#34;&gt;요즘IT - 자바 DTO vs Record, 무엇을 사용해야 할까?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://youtu.be/0RyECSrkyOg?si=WQgo4AkIdx50EqPa&#34;&gt;유튜브 코딩하는오후 - SpringBoot Record 활용&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     <item>
       <title>SpringBoot에서 Swagger 도입부터 트러블슈팅에 배포까지...(?)</title>
