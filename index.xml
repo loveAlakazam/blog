@@ -6,8 +6,18 @@
     <description>Recent content on EK Dev Blog</description>
     <generator>Hugo -- 0.125.7</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 05 Apr 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 14 Apr 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://loveAlakazam.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>RDBMS(Mysql)에서의 인덱스 개념 정리</title>
+      <link>https://loveAlakazam.github.io/blog/docs/rdbms-index/</link>
+      <pubDate>Mon, 14 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://loveAlakazam.github.io/blog/docs/rdbms-index/</guid>
+      <description>만능은 없다. TradeOff는 있다. 읽기 성능이 좋으면 쓰기성능이 구리고, 쓰기성능이 좋으면 읽기성능에 구려진다.
+정규화 쓰기성능을 높임으로써 데이터 중복을 줄이고 일관성을 높인다.
+반정규화 읽기성능을 높임으로써 일부 중복을 허용한다.
+트랜잭션 격리 수준 Uncommitted Read - 커밋되지 않은 읽기 다른 트랜잭션에서 커밋되지 않은 데이터에도 접근하게 할 수 있는 격리수준 DirtyRead: 커밋되지 않은 트랜잭션에 접근해서 아직 정상반영되지 않은 데이터를 읽는 현상 (해당 데이터는 롤백되어 없어질 수도 있다) Committed Read - 커밋된 읽기 다른 트랜잭션에서 커밋된 데이터에만 접근할 수 있게 하는 격리수준 Non-Repeatable Read: 하나의 트랜잭션에서 동일한 SELECT 쿼리문을 실행했을 때 커밋전의 데이터와 커밋후의 데이터가 읽히면서 다른결과가 생기는 현상 Repeatable Read - 반복가능한 읽기 커밋된 데이터만 읽을 수 있으며, 자신보다 빨리 수행된 트랜잭션에서 커밋한 데이터만 읽을 수 있는 격리 수준</description>
+    </item>
     <item>
       <title>아키텍쳐 고민하기</title>
       <link>https://loveAlakazam.github.io/blog/docs/upgrade-architect/</link>
