@@ -6,8 +6,36 @@
     <description>Recent content in Docs on EK Dev Blog</description>
     <generator>Hugo -- 0.145.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 05 Apr 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 14 Apr 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/blog/docs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>RDBMS(Mysql)에서의 인덱스 개념 정리</title>
+      <link>http://localhost:1313/blog/docs/rdbms-index/</link>
+      <pubDate>Mon, 14 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/docs/rdbms-index/</guid>
+      <description>&lt;h1 id=&#34;만능은-없다-tradeoff는-있다&#34;&gt;만능은 없다. TradeOff는 있다.&lt;/h1&gt;
+&lt;p&gt;읽기 성능이 좋으면 쓰기성능이 구리고, 쓰기성능이 좋으면 읽기성능에 구려진다.&lt;/p&gt;
+&lt;h2 id=&#34;정규화&#34;&gt;정규화&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;쓰기성능을 높임&lt;/strong&gt;으로써 데이터 중복을 줄이고 일관성을 높인다.&lt;/p&gt;
+&lt;h2 id=&#34;반정규화&#34;&gt;반정규화&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;읽기성능을 높임&lt;/strong&gt;으로써 일부 중복을 허용한다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;트랜잭션-격리-수준&#34;&gt;트랜잭션 격리 수준&lt;/h1&gt;
+&lt;h2 id=&#34;uncommitted-read---커밋되지-않은-읽기&#34;&gt;Uncommitted Read - 커밋되지 않은 읽기&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;다른 트랜잭션에서 커밋되지 않은 데이터에도 접근하게 할 수 있는 격리수준&lt;/li&gt;
+&lt;li&gt;DirtyRead: 커밋되지 않은 트랜잭션에 접근해서 아직 정상반영되지 않은 데이터를 읽는 현상 (해당 데이터는 롤백되어 없어질 수도 있다)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;committed-read---커밋된-읽기&#34;&gt;Committed Read - 커밋된 읽기&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;다른 트랜잭션에서 커밋된 데이터에만 접근할 수 있게 하는 격리수준&lt;/li&gt;
+&lt;li&gt;Non-Repeatable Read: 하나의 트랜잭션에서 동일한 SELECT 쿼리문을 실행했을 때 커밋전의 데이터와 커밋후의 데이터가 읽히면서 다른결과가 생기는 현상&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;repeatable-read---반복가능한-읽기&#34;&gt;Repeatable Read - 반복가능한 읽기&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;커밋된 데이터만 읽을 수 있으며, 자신보다 빨리 수행된 트랜잭션에서 커밋한 데이터만 읽을 수 있는 격리 수준&lt;/p&gt;</description>
+    </item>
     <item>
       <title>아키텍쳐 고민하기</title>
       <link>http://localhost:1313/blog/docs/upgrade-architect/</link>
@@ -57,21 +85,6 @@
 &lt;blockquote&gt;
 &lt;p&gt;설계가 명확하면, &amp;ldquo;코드를 치는 행위&amp;rdquo; 는 목표를 달성하는 &amp;ldquo;수단&amp;rdquo; 이 된다.&lt;/p&gt;
 &lt;p&gt;설계가 명확하지 않으면, &amp;ldquo;코드를 치는 행위&amp;rdquo; 는 불필요한 &amp;ldquo;노동&amp;rdquo; 이 된다.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Dto Record</title>
-      <link>http://localhost:1313/blog/docs/dto-record/</link>
-      <pubDate>Fri, 04 Apr 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/docs/dto-record/</guid>
-      <description>&lt;h2 id=&#34;dto-레코드란&#34;&gt;Dto 레코드란?&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;참고자료
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://yozm.wishket.com/magazine/detail/2814/&#34;&gt;요즘IT - 자바 DTO vs Record, 무엇을 사용해야 할까?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://youtu.be/0RyECSrkyOg?si=WQgo4AkIdx50EqPa&#34;&gt;유튜브 코딩하는오후 - SpringBoot Record 활용&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;</description>
     </item>
     <item>
       <title>SpringBoot에서 Swagger 도입부터 트러블슈팅에 배포까지...(?)</title>
@@ -338,18 +351,6 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;UserPoint가 클래스라면 set으로 데이터를 변경하여 수정할 수 있습니다.
 하지만 record 클래스는 데이터를 읽을 수 있지만, 데이터변경을 금지하기 때문에 set 이 허용하지 않기때문에 포인트충전된 값으로 포인트 객체를 생성하여 리턴하였습니다.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Test Driven Development</title>
-      <link>http://localhost:1313/blog/docs/test-driven-develop/</link>
-      <pubDate>Mon, 24 Mar 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/docs/test-driven-develop/</guid>
-      <description>&lt;h2 id=&#34;시작&#34;&gt;시작&lt;/h2&gt;
-&lt;h2 id=&#34;tddtest-driven-development-가-무엇이고-왜-필요할까&#34;&gt;TDD(Test Driven Development) 가 무엇이고, 왜 필요할까?&lt;/h2&gt;
-&lt;h2 id=&#34;testable-코드란&#34;&gt;Testable 코드란?&lt;/h2&gt;
-&lt;h2 id=&#34;mock-과-stub-은-어떤차이가-있을까&#34;&gt;Mock 과 Stub 은 어떤차이가 있을까?&lt;/h2&gt;
-&lt;h2 id=&#34;블랙박스테스트-와-화이트박스테스트는-무엇일까&#34;&gt;블랙박스테스트 와 화이트박스테스트는 무엇일까?&lt;/h2&gt;
-&lt;h2 id=&#34;결론&#34;&gt;결론&lt;/h2&gt;</description>
     </item>
     <item>
       <title>동시성 제어 (Concurrency Methods)</title>
