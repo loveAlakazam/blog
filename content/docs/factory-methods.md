@@ -1,7 +1,7 @@
 ---
 title: "정적 팩토리 메소드"
 date: "2025-04-13"
-draft: true
+draft: false
 ---
 
 ## 서론
@@ -83,7 +83,7 @@ new 연산자를 사용할 때보다 정적 팩토리 메서드를 사용할 때
 
 인스턴스를 서로 다르게 반환하는 기능을 추가하고 싶다면, 매개변수에 따라 다른 클래스의 인스턴스를 반환해주면 됩니다.
 
-### (5) 정적 팩토리 메서드를 작성하는 시점에는 반환할 객체의 클래스가 존재하지 않아도 된다.
+### (5) 정적 팩토리 메서드를 작성하는 시점에는 반환할 객체의 클래스가 존재하지 않아도 된다
 
 서비스 제공자 프레임워크와 JDBC 를 만드는 근간이기도하고, 구현체가 전혀 존재하지 않아도 인터페이스만으로 정적 팩토리 메소드를 작성할 수 있습니다.
 
@@ -170,8 +170,171 @@ List<Complaint> litany = Collections.list(legacyLitany);
 
 ## 정적 팩토리 메소드를 사용하여 코드를 개선해보자
 
+> 정적팩토리 메소드를 이용하여 샘플데이터 생성 코드 개선
+
+- 샘플데이터 생성: 정적팩토리 메소드를 이용하여 콘서트와 콘서트일정, 콘서트좌석 을 초기화 해주는 코드
+
+```java
+// Concert.java
+
+@Entity
+@Getter
+@Table(name ="concerts")
+@RequiredArgsConstructor
+public class Concert extends BaseEntity {
+ @Builder
+ private Concert(String name, String artistName) {
+  this.name = name;
+  this.artistName = artistName;
+ }
+ public static Concert of(String name, String artistName) {
+  if(EmptyStringValidator.isEmptyString(name)) throw new BusinessException(SHOULD_NOT_EMPTY);
+  if(EmptyStringValidator.isEmptyString(artistName)) throw new BusinessException(SHOULD_NOT_EMPTY);
+
+  return Concert.builder()
+   .name(name)
+   .artistName(artistName)
+   .build();
+ }
+
+ public static Concert create(String name, String artistName, LocalDate progressDate, String place, long price) {
+  ...(유효성 검증로직 생략)
+
+  // 콘서트 생성
+  Concert concert = Concert.of(name, artistName); // 👈 정적팩토리 메소드 활용
+  concert.addConcertDate(progressDate, place, price); // 👈 연관객체 ConcertDate  생성
+  return concert;
+ }
+
+ public void addConcertDate(LocalDate progressDate, String place, long price) {
+  ...(유효성 검증로직 생략)
+
+  // 공연날짜 정보 추가
+  ConcertDate newConcertDate = ConcertDate.of(
+    this, progressDate,
+     true,
+      place
+  ); // 👈 정적팩토리 메소드 활용
+
+  // 해당날짜의 좌석 50개 초기화
+  newConcertDate.initializeSeats(this, price);
+  // 리스트에 날짜정보 추가
+  this.dates.add(newConcertDate);
+ }
+
+}
 ```
 
+```java
+// ConcertDate.java
+
+@Entity
+@Getter
+@Table(name ="concert_dates")
+@RequiredArgsConstructor
+public class ConcertDate extends BaseEntity {
+
+ @Builder
+ private ConcertDate(Concert concert, LocalDate progressDate, boolean isAvailable, String place) {
+  this.concert = concert;
+  this.progressDate = progressDate;
+  this.isAvailable = isAvailable;
+  this.place = place;
+ }
+ public static ConcertDate of(Concert concert, LocalDate progressDate, boolean isAvailable, String place) {
+  if(concert == null) throw new BusinessException(NOT_NULLABLE);
+  if(progressDate == null) throw new BusinessException(NOT_NULLABLE);
+  if(EmptyStringValidator.isEmptyString(place)) throw new BusinessException(SHOULD_NOT_EMPTY);
+
+  return ConcertDate.builder()
+   .concert(concert)
+   .progressDate(progressDate)
+   .isAvailable(isAvailable)
+   .place(place)
+   .build();
+ }
+
+   public void initializeSeats(Concert concert, long price) {
+  // 콘서트 좌석 50개를 만든다
+  for(int seatNumber = MIN_SEAT_NUMBER; seatNumber <= MAX_SEAT_NUMBER ; seatNumber++) {
+   ConcertSeat concertSeat = ConcertSeat.of(concert, this, seatNumber, price , true);
+   this.seats.add(concertSeat);
+  }
+ }
+}
+```
+
+> 정적팩토리 메소드를 호출하여 샘플테스트 데이터셋을 쉽게 만들 수 있다.
+
+```java
+// 테스트코드
+
+@Test
+void 임시예약이_유효한상태에서_예약확정을_요청하면_상태변경에_성공된다() {
+  // given
+  User user = User.of("테스트"); // 👈 정적팩토리메소드를 사용하여 테스트를 위한 유저 데이터 생성 및 초기화
+  Concert concert = Concert.create( // 👈 정적팩토리 메소드를 활용하여 테스트를 위한 콘서트/콘서트일정/콘서트좌석 데이터 생성 및 초기화
+    "테스트 콘서트",
+     "테스트 아티스트",
+      LocalDate.now(),
+       "테스트 장소",
+       15000
+  );
+  ConcertDate concertDate = concert.getDates().get(0);
+  ConcertSeat concertSeat = concertDate.getSeats().get(0);
+  assertTrue(concertSeat.isAvailable()); // 해당좌석은 예약가능
+
+  log.info("해당 좌석 임시예약 상태로 변경");
+  long reservationId = 1L;
+  Reservation reservation = Reservation.of( // 👈 정적팩토리메소드를 사용하여 테스트를 위한 예약 데이터 생성
+    user,
+    concert,
+    concertDate,
+    concertSeat
+    );
+  assertDoesNotThrow(()-> reservation.temporaryReserve());
+  assertTrue(reservation.isTemporary()); // 임시예약상태
+
+  when(reservationRepository.findById(reservationId)).thenReturn(reservation);
+
+  // when
+  log.info("when: 임시예약이 유효일자가 만료된 상태에서 예약확정 상태로 변경을 요청한다");
+  ReservationInfo.Confirm info = assertDoesNotThrow(
+    () -> reservationService.confirm(ReservationCommand.Confirm.of(reservationId))
+  );
+
+  // then
+  assertTrue(info.reservation().isConfirm()); // 예약확정상태인지 확인
+  assertEquals(ReservationStatus.CONFIRMED, info.reservation().getStatus());
+  assertNotNull(info.reservation().getReservedAt());
+  assertNull(info.reservation().getTempReservationExpiredAt());
+  assertFalse(concertSeat.isAvailable()); // 좌석은 예약불가능 상태인지 확인
+}
+```
+
+> 컨트롤러->서비스로 계층별 DTO로 전환시켜서 전달
+
+```java
+@RestController
+@RequestMapping("concerts")
+@RequiredArgsConstructor
+public class ConcertController implements ConcertApiDocs {
+ private final ConcertService concertService;
+
+ // 콘서트의 예약가능 날짜 목록조회
+ @GetMapping("/{id}/dates/list")
+ public ResponseEntity<ApiResponse<ConcertResponse.GetAvailableConcertDates>> getAvailableConcertDates(
+  @PathVariable("id") long id,
+  @RequestParam(value = "page", required = false, defaultValue = "1") int page
+ ) {
+  // 리스트를 반환
+  ConcertInfo.GetConcertDateList info = concertService.getConcertDateList(ConcertCommand.GetConcertDateList.of(id)); // 👈 정적팩토리 메소드를 사용
+  // 페이징처리를 한다
+  Page<ConcertDate> concertDatePage = PaginationUtils.toPage(info.concertDates(), page);
+  // 페이징처리 결과를 응답데이터에 넣고 응답한다
+  return ApiResponseEntity.ok(ConcertResponse.GetAvailableConcertDates.from(concertDatePage)); // 👈 정적팩토리 메소드를 사용
+ }
+}
 ```
 
 ---
