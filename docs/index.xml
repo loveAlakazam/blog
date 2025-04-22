@@ -6,8 +6,17 @@
     <description>Recent content in Docs on EK Dev Blog</description>
     <generator>Hugo -- 0.125.7</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 14 Apr 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 22 Apr 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://loveAlakazam.github.io/blog/docs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>RDBMS 락을 사용한 동시성문제 해결</title>
+      <link>https://loveAlakazam.github.io/blog/docs/rdbms-locks/</link>
+      <pubDate>Tue, 22 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://loveAlakazam.github.io/blog/docs/rdbms-locks/</guid>
+      <description>동시성문제 (RaceCondition) 여러개의 스레드가 같은 공유자원에 대해서 동시에 접근을 함으로써 공유자원의 데이터의 정합성이 깨지거나 순서대로 연산을 실행시켰을때
+데드락 (DeadLock) 1 2 3 4 화장품가게 에는 립밤 1개, 스킨로션 1개 를 판매하고 있다. - 손님 A가 립밤 1개를 집었다. - 손님 B가 스킨로션 1개를 집었다. 손님 A 는 (B가 집은) 스킨로션을 원하고, 손님 B 는 (A가 집은) 립밤을 원한다.
+손님 A의 입장에서는 손님B가 스킨로션을 내려놓을 때까지 기다려야하고 손님 B의 입장에서는 손님A가 립밤을 내려놓을 때까지 기다려야한다.</description>
+    </item>
     <item>
       <title>RDBMS(Mysql)에서의 인덱스 개념 정리</title>
       <link>https://loveAlakazam.github.io/blog/docs/rdbms-index/</link>
