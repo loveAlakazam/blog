@@ -6,18 +6,33 @@
     <description>Recent content in Docs on EK Dev Blog</description>
     <generator>Hugo -- 0.145.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 22 Apr 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 10 May 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/blog/docs/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Rdbms Locks</title>
+      <title>6주차 회고</title>
+      <link>http://localhost:1313/blog/docs/hh-08-week06-remind/</link>
+      <pubDate>Sat, 10 May 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/docs/hh-08-week06-remind/</guid>
+      <description>&lt;h2 id=&#34;q-인상깊었던-주제는-무엇이었나요&#34;&gt;Q. 인상깊었던 주제는 무엇이었나요?&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;분산락과 캐시 전략중 어떤 주제가 더 인상깊었나요?&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;항해를 하기전 레디스를 사용해왔을때는 JWT 토큰정도로만 해왔습니다.
+Key value 기반 NoSQL 데이터베이스인 레디스가 단순히 캐싱의 역할을 하지 않고 Lock으로서의 역할을 할 수 있다는걸 이번과제를 통해 새로알게됐습니다. 또한 읽기와 쓰기에서의 캐싱전략이 여러가지가 있다는걸 처음알게됐습니다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;해당 개념을 통해 어떤 구조적/성능적 문제 해결을 가능성을 느꼈나요?&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;아직까지는 과제를 수행해보면서 어느점이 문제인지, 그에 대한 해결은 무엇인지에 대한 답변이 명확하지 않았습니다.
+그래도 떠오르는 한가지는 캐싱쪽에서는 트랜잭션을 접근하기전에 캐시저장소(redis)에서 캐시히트가되면 빠른 응답을 해줄 수 있다는 점입니다.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>RDBMS 락을 사용한 동시성문제 해결</title>
       <link>http://localhost:1313/blog/docs/rdbms-locks/</link>
       <pubDate>Tue, 22 Apr 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/blog/docs/rdbms-locks/</guid>
-      <description>&lt;h1 id=&#34;동시성문제-racecondition&#34;&gt;동시성문제 (RaceCondition)&lt;/h1&gt;
-&lt;p&gt;여러개의 스레드가 같은 공유자원에 대해서 동시에 접근을 함으로써 공유자원의 데이터의 정합성이 깨지거나
-순서대로 연산을 실행시켰을때&lt;/p&gt;
+      <description>&lt;h2 id=&#34;동시성-문제-racecondition&#34;&gt;동시성 문제 (RaceCondition)&lt;/h2&gt;
+&lt;p&gt;여러개의 스레드가 같은 공유자원에 대해서 동시에 읽기/쓰기 접근 요청할 때
+공유자원의 데이터의 정합성이 깨지는 현상.&lt;/p&gt;
 &lt;hr&gt;
-&lt;h1 id=&#34;데드락-deadlock&#34;&gt;데드락 (DeadLock)&lt;/h1&gt;
+&lt;h2 id=&#34;데드락-deadlock&#34;&gt;데드락 (DeadLock)&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34; id=&#34;hl-0-1&#34;&gt;&lt;a class=&#34;lnlinks&#34; href=&#34;#hl-0-1&#34;&gt;1&lt;/a&gt;
