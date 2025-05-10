@@ -6,14 +6,24 @@
     <description>Recent content in Docs on EK Dev Blog</description>
     <generator>Hugo -- 0.125.7</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 22 Apr 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 10 May 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://loveAlakazam.github.io/blog/docs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>항해99 6주차 회고(WIL)</title>
+      <link>https://loveAlakazam.github.io/blog/docs/hh-08-week06-remind/</link>
+      <pubDate>Sat, 10 May 2025 00:00:00 +0000</pubDate>
+      <guid>https://loveAlakazam.github.io/blog/docs/hh-08-week06-remind/</guid>
+      <description>Q. 인상깊었던 주제는 무엇이었나요? 분산락과 캐시 전략중 어떤 주제가 더 인상깊었나요?
+항해를 하기전 레디스를 사용해왔을때는 JWT 토큰정도로만 해왔습니다. Key value 기반 NoSQL 데이터베이스인 레디스가 단순히 캐싱의 역할을 하지 않고 Lock으로서의 역할을 할 수 있다는걸 이번과제를 통해 새로알게됐습니다. 또한 읽기와 쓰기에서의 캐싱전략이 여러가지가 있다는걸 처음알게됐습니다.
+해당 개념을 통해 어떤 구조적/성능적 문제 해결을 가능성을 느꼈나요?
+아직까지는 과제를 수행해보면서 어느점이 문제인지, 그에 대한 해결은 무엇인지에 대한 답변이 명확하지 않았습니다. 그래도 떠오르는 한가지는 캐싱쪽에서는 트랜잭션을 접근하기전에 캐시저장소(redis)에서 캐시히트가되면 빠른 응답을 해줄 수 있다는 점입니다.</description>
+    </item>
     <item>
       <title>RDBMS 락을 사용한 동시성문제 해결</title>
       <link>https://loveAlakazam.github.io/blog/docs/rdbms-locks/</link>
       <pubDate>Tue, 22 Apr 2025 00:00:00 +0000</pubDate>
       <guid>https://loveAlakazam.github.io/blog/docs/rdbms-locks/</guid>
-      <description>동시성문제 (RaceCondition) 여러개의 스레드가 같은 공유자원에 대해서 동시에 접근을 함으로써 공유자원의 데이터의 정합성이 깨지거나 순서대로 연산을 실행시켰을때
+      <description>동시성 문제 (RaceCondition) 여러개의 스레드가 같은 공유자원에 대해서 동시에 읽기/쓰기 접근 요청할 때 공유자원의 데이터의 정합성이 깨지는 현상.
 데드락 (DeadLock) 1 2 3 4 화장품가게 에는 립밤 1개, 스킨로션 1개 를 판매하고 있다. - 손님 A가 립밤 1개를 집었다. - 손님 B가 스킨로션 1개를 집었다. 손님 A 는 (B가 집은) 스킨로션을 원하고, 손님 B 는 (A가 집은) 립밤을 원한다.
 손님 A의 입장에서는 손님B가 스킨로션을 내려놓을 때까지 기다려야하고 손님 B의 입장에서는 손님A가 립밤을 내려놓을 때까지 기다려야한다.</description>
     </item>
